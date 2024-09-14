@@ -1,0 +1,149 @@
+---
+title: '五分钟创建一个 tailwind + next.js 博客'
+date: '2024-09-14'
+tags: ['next.js', 'tailwind', '博客', '教程']
+draft: false
+summary: '五分钟创建一个tailwind+next.js博客教程, 这非常容易'
+---
+
+## 简介
+
+这是一个非常容易上手的博客系统， 只需要五分钟就可以创建一个博客系统。
+
+<TOCInline toc={props.toc} exclude="Overview" toHeading={3} />
+
+## 自定义博客模板
+
+### 1. 使用模板
+
+我们可以使用[tailwind-nextjs-starter-blog](https://github.com/timlrx/tailwind-nextjs-starter-blog)这个项目模板来创建我们的博客。
+
+进入 [tailwind-nextjs-starter-blog](https://github.com/timlrx/tailwind-nextjs-starter-blog) ， 点击 `Use this template` ， 按照提示创建一个新的仓库，新仓库将包含 tailwind-nextjs-starter-blog 的所有文件和目录。
+
+- 为什么要用这个模板？
+
+1. **节省开发时间**：
+
+   - 使用这个模板可以大大节省开发时间，无需从头开始构建博客系统。
+
+2. **集成现代最佳实践**：
+
+   - 该模板已经集成了现代网站开发的最佳实践，包括响应式设计、SEO 优化和性能优化。
+
+3. **基于 Next.js**：
+   - 由于基于 Next.js，开发者还可以利用其服务器渲染和静态生成功能，构建高性能的博客网站。
+
+### 2. 下载仓库
+
+使用 `git clone` 下载仓库。
+
+### 3. 安装依赖
+
+使用 `yarn install` 安装依赖。
+
+### 4. 运行博客
+
+使用 `yarn dev` 运行博客。
+
+### 5. 配置
+
+#### 5.1 博客信息
+
+进入 `siteMetadata.js` 文件， 修改博客的标题，描述，语言，时区等信息。
+具体可以看以下代码：
+
+```js
+module.exports = {
+  title: '你的博客标题',
+  author: '你的名字',
+  headerTitle: '博客标题',
+  description: '博客描述',
+  language: 'zh-CN',
+  theme: 'system', // system, dark or light
+  siteUrl: 'https://yourwebsite.com',
+  siteRepo: 'https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME',
+  siteLogo: '/static/images/logo.png',
+  image: '/static/images/avatar.png',
+  socialBanner: '/static/images/twitter-card.png',
+  email: 'your-email@example.com',
+  github: 'https://github.com/YOUR_USERNAME',
+  twitter: 'https://twitter.com/YOUR_USERNAME',
+  facebook: 'https://facebook.com/YOUR_USERNAME',
+  youtube: 'https://youtube.com/YOUR_USERNAME',
+  linkedin: 'https://www.linkedin.com/in/YOUR_USERNAME',
+  locale: 'zh-CN',
+  analytics: {
+    // supports plausible, simpleAnalytics or googleAnalytics
+    plausibleDataDomain: '', // e.g. tailwind-nextjs-starter-blog.vercel.app
+    simpleAnalytics: false, // true or false
+    googleAnalyticsId: '', // e.g. UA-000000-2 or G-XXXXXXX
+  },
+  newsletter: {
+    // supports mailchimp, buttondown, convertkit, klaviyo, revue, emailoctopus
+    // Please add your .env file and modify it according to your selection
+    provider: 'buttondown',
+  },
+  comment: {
+    // support provider: giscus, utterances, disqus
+    provider: 'giscus', // giscus, utterances, disqus
+    giscusConfig: {
+      repo: process.env.NEXT_PUBLIC_GISCUS_REPO,
+      repositoryId: process.env.NEXT_PUBLIC_GISCUS_REPOSITORY_ID,
+      category: process.env.NEXT_PUBLIC_GISCUS_CATEGORY,
+      categoryId: process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID,
+      mapping: 'pathname', // supported options: pathname, url, title
+      reactions: '1', // Emoji reactions: 1 = enable / 0 = disable
+      metadata: '0', // Metadata: 1 = enable / 0 = disable
+      theme: 'light', // Theme example: light, dark, dark_dimmed, etc
+      darkTheme: 'transparent_dark', // Theme when dark mode
+      themeURL: '', // If you have a custom theme, provide the URL
+    },
+  },
+}
+```
+
+#### 5.2 评论
+
+建议使用 `giscus`, 来给博客添加评论功能。  
+打开 [giscus 配置页](https://giscus.app/), 跟随教程进行配置，将获取到的 `repo`, `repositoryId`, `category`, `categoryId` 填入 `.env` 文件中。
+在这里还可以选择 `theme`, `lang` 等配置。
+
+> giscus 是什么？
+> 利用 GitHub Discussions 实现的评论系统，让访客借助 GitHub 在你的网站上留下评论和反应吧！本项目深受 utterances 的启发。
+
+#### 5.3 搜索
+
+使用 `kbar` 保持原配置不变.
+
+#### 5.4 流量分析
+
+我这里使用的 [Google Analytics](https://marketingplatform.google.com/about/analytics/)
+
+- 进入网站后，点击 Get started today
+- 登录后，选择添加一个 Web 项目
+- 会获取到一个 `googleAnalyticsId`， 例如 `G-PNAJN6T128`
+- 获取到 `googleAnalyticsId` 后，在 `next.config.js` 中配置 `googleAnalyticsId` 即可.
+
+### 6. 汉化
+
+将必要的英文翻译成中文。
+
+## 部署
+
+使用 `vercel` 部署博客。进入 [vercel](https://vercel.com/) ， 点击 `New Project` ， 选择刚才创建的仓库， 点击 `Deploy` ， 等待部署完成。
+
+### 添加自定义域名
+
+首先需要准备一个域名， 然后进入 [vercel](https://vercel.com/) ， 点击 `Domains` ， 点击 `Add domain` ， 添加域名。
+
+然后进入域名管理页面， 点击 `Manage Vercel` ， 选择刚才创建的仓库， 点击 `Continue` ， 等待域名添加完成。
+
+### 配置域名
+
+进入 [vercel](https://vercel.com/) ， 点击 `Projects` ， 选择刚才创建的仓库， 点击 `Settings` ， 点击 `Domains` ， 点击 `Add custom domain` ， 添加域名。
+
+### 配置 DNS
+
+进入域名管理页面， 点击 `Manage Vercel` ， 选择刚才创建的仓库， 点击 `Continue` ， 等待域名添加完成。
+
+最后，使用域名访问博客， 大功告成！

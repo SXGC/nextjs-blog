@@ -106,6 +106,11 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
 
   const Layout = layouts[post.layout || defaultLayout]
 
+  const newToc = post.toc.map((item) => {
+    const newUrl = item.url.replace(/-\d+$/, '')
+    return { ...item, url: newUrl }
+  })
+
   return (
     <>
       <script
@@ -113,7 +118,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Layout content={mainContent} authorDetails={authorDetails} next={next} prev={prev}>
-        <MDXLayoutRenderer code={post.body.code} components={components} toc={post.toc} />
+        <MDXLayoutRenderer code={post.body.code} components={components} toc={newToc} />
       </Layout>
     </>
   )
