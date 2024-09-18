@@ -147,3 +147,26 @@ module.exports = {
 进入域名管理页面， 点击 `Manage Vercel` ， 选择刚才创建的仓库， 点击 `Continue` ， 等待域名添加完成。
 
 最后，使用域名访问博客， 大功告成！
+
+## Google Search Console
+
+最后，我们需要将网址提交到 Google Search Console，以便 Google 可以更好地收录我们的网站。
+
+进入 [Google Search Console](https://search.google.com/search-console/about) ， 点击 `添加网站` ， 添加域名。
+
+此时需要验证域名所有权， 所有权可以通过多种方式添加。这次我选择使用*网址前缀*类型中的，HTML标记来验证。
+![网址前缀](/static/images/google-search-console-1.png)
+
+将 Google 提供的 HTML meta 标记添加到 `layout.tsx` 文件的 `head` 标签中。
+
+```html
+<head>
+  ...
+  <meta name="google-site-verification" content="YOUR_GOOGLE_SITE_VERIFICATION_CODE" />
+</head>
+<body>
+  ...
+</body>
+```
+
+添加完成后， 提交代码到 Github ，等待 Vercel 自动重部署。
